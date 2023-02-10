@@ -293,11 +293,19 @@ case="x"
 # data_type_y = "cat"; Cy=2   # real, cat, cts
 
 sim_indexes = 1:5; mechanisms=c("MNAR","MAR","MCAR") #; Ignorables=c(F,T)
-NL_x=F; NL_y=F; NL_r=F
-methods=c("mean","mice","idlglm","dlglm")
+methods=c("mean","mice","idlglm","dlglm","miwae","notmiwae")
 
 init_r = "default"   # or "alt"
 
+# process linear miss model sims
+NL_x=F; NL_y=F; NL_r=F
+run_processScript(beta, pi, miss_pct_features,
+                  Ns = c(1e4,1e5), Ps=c(50, 25), Ds=c(2, 8), phi0, case, data_type_y="cat", Cy=2,
+                  sim_indexes, mechanisms,
+                  NL_x, NL_y, NL_r, methods, init_r)
+
+# process nonlinear miss model sims
+NL_x=F; NL_y=F; NL_r=T
 run_processScript(beta, pi, miss_pct_features,
                   Ns = c(1e4,1e5), Ps=c(50, 25), Ds=c(2, 8), phi0, case, data_type_y="cat", Cy=2,
                   sim_indexes, mechanisms,
