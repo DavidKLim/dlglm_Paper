@@ -18,6 +18,7 @@ early_stop=T
 
 trace=F; draw_miss=T   # default.
 methods=c("dlglm","idlglm","mice")
+# methods=c("dlglm","idlglm","mice","miwae","notmiwae")  # maybe not including miwae/notmiwae in UCI
 
 init_r = "default"   # or "alt"
 dlglm_pref = if(init_r=="default"){""}else if(init_r=="alt"){"alt_init/"}
@@ -104,14 +105,20 @@ for(d in 1:length(datasets)){
     }
 
     if(!file.exists(fname_mice) & "mice" %in% methods){
-
-      # sim.params = list(N=N, D=D, P=P, data_types=data_types, family=family, sim_index=sim_indexes[s], ratios=c(train=.8,valid=.1,test=.1),
-      #                   beta=beta, C=C, Cy=Cy, NL_x=NL_x, NL_y=NL_y)
-      # miss.params=list(scheme="UV", mechanism=mechanisms[m], NL_r=NL_r, pi=pi, phi0=phi0, miss_pct_features=miss_pct_features, miss_cols=miss_cols, ref_cols=ref_cols)
       res_mice = run_mice(dir_name, sim.params, miss.params, X, Y, mask_x, mask_y, g, data_types_x, family, niws = niws)
       save(res_mice, file=fname_mice)
       rm(res_mice)
     }
+    # if(!file.exists(fname_miwae) & "miwae" %in% methods){
+    #   res_mice = run_miwae(dir_name, sim.params, miss.params, X, Y, mask_x, mask_y, g, data_types_x, niws = niws)
+    #   save(res_mice, file=fname_mice)
+    #   rm(res_mice)
+    # }
+    # if(!file.exists(fname_notmiwae) & "notmiwae" %in% methods){
+    #   res_mice = run_notmiwae(dir_name, sim.params, miss.params, X, Y, mask_x, mask_y, g, data_types_x, niws = niws)
+    #   save(res_mice, file=fname_mice)
+    #   rm(res_mice)
+    # }
   }}
 }
 

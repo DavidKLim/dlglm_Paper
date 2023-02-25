@@ -1,5 +1,5 @@
-# unbalanced = F
-unbalanced = T
+unbalanced = F
+# unbalanced = T
 pref = if(!unbalanced){""}else{"unbalanced/"}
 
 dir_name = "Results_BANKMARKETING/miss_x/phiNA/sim1"
@@ -184,3 +184,10 @@ metrics
 # pROC::auc(Ys$test$Y_aug, pred_classes_mice)
 
 save(metrics, file=sprintf("%s/%smetrics.out",dir_name,pref))
+
+
+## looking at the coef est's
+w = res$results$w   # 0 HLs, 2 x 16.
+betas = w[2,]-w[1,]
+names(betas) = names(X)
+betas  # print coef ests for 0 HL res

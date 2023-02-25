@@ -44,7 +44,7 @@ run_processScript = function(beta=0.25, pi=0.3, miss_pct_features = 50,
                           family=family,
                           sim_index=sim_index, ratios=c(train=.8,valid=.1,test=.1),
                           beta=beta, C=C, Cy=Cy, NL_x=NL_x, NL_y=NL_y)
-        miss.params = list(scheme="UV", mechanism=mechanism, pi=pi, phi0=phi0, miss_pct_features=miss_pct_features,NL_r=F)
+        miss.params = list(scheme="UV", mechanism=mechanism, pi=pi, phi0=phi0, miss_pct_features=miss_pct_features,NL_r=NL_r)
 
         list_res[[s]] = dlglm::processResults(prefix=prefix,data.file.name = data.file.name, mask.file.name=mask.file.name,
                                        sim.params = sim.params,
@@ -262,6 +262,14 @@ run_processScript = function(beta=0.25, pi=0.3, miss_pct_features = 50,
                     width=.2, position=position_dodge(.9),color="black") +
       labs(title=bquote( list("n =" ~ .(N) ~ ", p =" ~ .(P) ~ ", d =" ~ .(D), ~ mu[phi]==.(phi0)) ), y = perf_metrics[l], x="Mechanism") +
       theme(legend.title = element_blank(), text=element_text(size = 20))#,axis.text.x = element_text(colour = c(rep("black",nlevels(bar_df$mechanism)-1),"red")))
+
+    if(perf_metrics[l] %in% c("L1")){
+      p = p + scale_y_continuous(limits= c(0, 2), oob=scales::rescale_none)
+    } else if(perf_metrics[l] %in% c("PB")){
+      p = p + scale_y_continuous(limits= c(0, 45), oob=scales::rescale_none)
+    } else if(perf_metrics[l] %in% c("predC_L1","predI_L1")){
+      p = p + scale_y_continuous(limits= c(0, 0.15), oob=scales::rescale_none)
+    }
 
     ggsave(filename=sprintf("%s%s.png",
                             dir_name, perf_metrics[l]),

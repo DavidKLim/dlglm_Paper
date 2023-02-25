@@ -57,7 +57,7 @@ run_processScript = function(dataset="SIM", pi=0.3, miss_pct_features = 50,
                           family=family,
                           sim_index=sim_index, ratios=c(train=.8,valid=.1,test=.1),
                           C=C, Cy=Cy, NL_x=F, NL_y=F)
-        miss.params = list(scheme="UV", mechanism=mechanism, pi=pi, phi0=phi0, miss_pct_features=miss_pct_features,NL_r=F)
+        miss.params = list(scheme="UV", mechanism=mechanism, pi=pi, phi0=phi0, miss_pct_features=miss_pct_features,NL_r=NL_r)
 
         list_res[[s]] = dlglm::processResults(dataset=dataset,prefix=prefix,data.file.name = data.file.name, mask.file.name=mask.file.name,
                                        sim.params = sim.params,
