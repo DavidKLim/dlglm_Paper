@@ -13,7 +13,7 @@ case = "x"; pi=0.3; phi0=5; miss_pct_features = 50
 
 learn_r = T#; covars_r_x = rep(1L,P); covars_r_y = 1L  # include all
 covars = "ally"   # "obs", "missy", "obsy", "all", "ally"
-normalize=F; mechanisms=c("MNAR","MAR","MCAR"); sim_indexes = 1:5
+normalize=F; mechanisms=c("MNAR","MAR","MCAR"); sim_indexes = 1:30
 early_stop=T
 trace=F; draw_miss=T   # default.
 methods=c("dlglm","idlglm","mice","miwae","notmiwae"); niws=50

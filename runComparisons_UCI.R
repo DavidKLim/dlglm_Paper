@@ -18,7 +18,6 @@ early_stop=T
 
 trace=F; draw_miss=T   # default.
 methods=c("dlglm","idlglm","mice")
-# methods=c("dlglm","idlglm","mice","miwae","notmiwae")  # maybe not including miwae/notmiwae in UCI
 
 init_r = "default"   # or "alt"
 dlglm_pref = if(init_r=="default"){""}else if(init_r=="alt"){"alt_init/"}
